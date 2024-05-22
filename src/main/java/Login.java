@@ -12,9 +12,10 @@ public class Login {
     private static final String CONNECTER_LOCATOR = "//button[normalize-space()='Login']";
     private static final String LOGOUT_LOCATOR = "//button[normalize-space()='Logout']";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+        ScreenRecorderUtil.startRecord("main");
         try {
             successfulLogin(driver);
             Thread.sleep(3000);
@@ -29,6 +30,7 @@ public class Login {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            ScreenRecorderUtil.stopRecord();
             driver.quit();
         }
 }
