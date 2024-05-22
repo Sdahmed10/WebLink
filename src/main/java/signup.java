@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class signup {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+        ScreenRecorderUtil.startRecord("main");
+
         // Successful signup attempt
         try {
             successfulSignup(driver);
@@ -36,7 +38,7 @@ public class signup {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        ScreenRecorderUtil.stopRecord();
         driver.quit();
     }
     public static void successfulSignup(WebDriver driver) throws InterruptedException {

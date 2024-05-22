@@ -7,10 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Authfailedandpassed {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Créer une instance du navigateur Chrome
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+        ScreenRecorderUtil.startRecord("main");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // Attente implicite globale
 
         // Ouvrir la page de connexion
@@ -26,6 +27,7 @@ public class Authfailedandpassed {
         authentificationAvecEchec(driver, "yihog598961@losvtn.com", "1234587");
 
         // Fermer le navigateur
+        ScreenRecorderUtil.stopRecord();
         driver.quit();
     }
 

@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Signupwithusename2caracters {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+        ScreenRecorderUtil.startRecord("main");
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/register");
         driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
         WebElement nameofclub = driver.findElement(By.xpath("//input[@id='name']"));
@@ -49,6 +50,7 @@ public class Signupwithusename2caracters {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ScreenRecorderUtil.stopRecord();
     }
     }
 
