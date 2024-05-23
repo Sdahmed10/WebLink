@@ -37,7 +37,7 @@ public class Login {
     public static void successfulLogin(WebDriver driver) throws InterruptedException {
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-        fillForm(driver,"ahmedsdiri+16@takiacademyteam.com", "12345Aa@");
+        fillForm(driver,"ahmedsdiri+16@takiacademyteam.com", "123456Aa@");
         clickElement(driver, CONNECTER_LOCATOR);
         clickElement(driver, LOGOUT_LOCATOR);
         System.out.println("Successful login");
