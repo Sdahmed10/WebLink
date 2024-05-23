@@ -13,7 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Forget {
-    public static void main(String[] args) throws InterruptedException, AWTException {
+    public static void main(String[] args) throws Exception {
+        ScreenRecorderUtil.startRecord("main");
         // Setup WebDriver
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -101,6 +102,7 @@ public class Forget {
                 System.out.println("Échec de la réinitialisation du mot de passe : " + e.getMessage());
             } finally {
                 Thread.sleep(5000);
+                ScreenRecorderUtil.stopRecord();
                 driver.quit();
             }
         } else {
