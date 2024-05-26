@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class editpassword {
     private static final String URL = "https://devlinkfootweb.softylines.com/auth/jwt/login";
+    private static final String URL1 = "https://devlinkfootweb.softylines.com/profile";
     private static final String EMAIL_LOCATOR = "//input[@id='email']";
     private static final String PASSWORD_LOCATOR = "//input[@id='password']";
     private static final String LOGIN_LOCATOR = "//button[normalize-space()='Login']";
@@ -21,7 +22,7 @@ public class editpassword {
 
 
     public static void main(String[] args) throws Exception {
-        ScreenRecorderUtil.startRecord("main");
+        //ScreenRecorderUtil.startRecord("main");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
@@ -39,7 +40,7 @@ public class editpassword {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ScreenRecorderUtil.stopRecord();
+            //ScreenRecorderUtil.stopRecord();
             driver.quit();
         }
     }
@@ -47,15 +48,23 @@ public class editpassword {
     public static void successfulreset(WebDriver driver) throws InterruptedException {
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-        fillForm(driver, "yevih95491@cgbird.com", "123456Aa@");
+        fillForm(driver, "yevih95491@cgbird.com", "1234567Aa@");
         clickElement(driver, LOGIN_LOCATOR);
         System.out.println("Successful login");
         clickElement(driver, PWD_LOCATOR);
-        fillForm1(driver, "123456Aa@","1234566Aa@", "1234566Aa@");
-        Thread.sleep(5000);
+        fillForm1(driver, "1234567Aa@","123456Aa@", "123456Aa@");
         clickElement(driver, SAVE_LOCATOR);
+        String expectedURL = "https://devlinkfootweb.softylines.com/profile";
+        // Compare the expected URL with the actual URL
+        if (URL1.equals(expectedURL)) {
+            System.out.println("URLs match. Test passed!");
+        } else {
+            System.out.println("URLs do not match. Test failed!");
+            System.out.println("Expected URL: " + expectedURL);
+            System.out.println("Actual URL: " + URL1);
+        }
+        Thread.sleep(3000);
         System.out.println("Successful reset");
-        clickElement(driver, LINK_LOCATOR);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         clickElement(driver, LOGOUT_LOCATOR);
@@ -64,42 +73,66 @@ public class editpassword {
     public static void failedreset(WebDriver driver) throws InterruptedException {
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-        fillForm(driver, "yevih95491@cgbird.com", "1234566Aa@");
+        fillForm(driver, "yevih95491@cgbird.com", "123456Aa@");
         clickElement(driver, LOGIN_LOCATOR);
         System.out.println("Successful login");
         clickElement(driver, PWD_LOCATOR);
-        fillForm1(driver, "123456Aa@", "123456Aa@", "123456Aa@");
-        Thread.sleep(5000);
+        fillForm1(driver, "1234567Aa@", "123456Aa@", "123456Aa@");
         clickElement(driver, SAVE_LOCATOR);
-        System.out.println("failed reset");
+        String expectedURL = "https://devlinkfootweb.softylines.com/profile/edit-password";
+        // Compare the expected URL with the actual URL
+        if (URL1.equals(expectedURL)) {
+            System.out.println("URLs match. Test passed!");
+        } else {
+            System.out.println("URLs do not match. Test failed!");
+            System.out.println("Expected URL: " + expectedURL);
+            System.out.println("Actual URL: " + URL1);
+        }
+        Thread.sleep(3000);
         clickElement(driver, LINK_LOCATOR);
         clickElement(driver, LOGOUT_LOCATOR);
     }
     public static void failedreset1(WebDriver driver) throws InterruptedException {
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-        fillForm(driver, "yevih95491@cgbird.com", "1234566Aa@");
+        fillForm(driver, "yevih95491@cgbird.com", "123456Aa@");
         clickElement(driver, LOGIN_LOCATOR);
         System.out.println("Successful login");
         clickElement(driver, PWD_LOCATOR);
-        fillForm1(driver, "1234566Aa@", "1234567Aa@", "123456Aa@");
-        Thread.sleep(5000);
+        fillForm1(driver, "12345678Aa@", "1234567Aa@", "123456Aa@");
         clickElement(driver, SAVE_LOCATOR);
-        System.out.println("failed reset1");
+        String expectedURL = "https://devlinkfootweb.softylines.com/profile/edit-password";
+        // Compare the expected URL with the actual URL
+        if (URL1.equals(expectedURL)) {
+            System.out.println("URLs match. Test passed!");
+        } else {
+            System.out.println("URLs do not match. Test failed!");
+            System.out.println("Expected URL: " + expectedURL);
+            System.out.println("Actual URL: " + URL1);
+        }
+        Thread.sleep(3000);
         clickElement(driver, LINK_LOCATOR);
         clickElement(driver, LOGOUT_LOCATOR);
     }
     public static void failedreset2(WebDriver driver) throws InterruptedException {
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-        fillForm(driver, "yevih95491@cgbird.com", "1234566Aa@");
+        fillForm(driver, "yevih95491@cgbird.com", "123456Aa@");
         clickElement(driver, LOGIN_LOCATOR);
         System.out.println("Successful login");
         clickElement(driver, PWD_LOCATOR);
         fillForm1(driver, "", "", "" );
-        Thread.sleep(5000);
         clickElement(driver, SAVE_LOCATOR);
-        System.out.println("failed reset2");
+        String expectedURL = "https://devlinkfootweb.softylines.com/profile/edit-password";
+        // Compare the expected URL with the actual URL
+        if (URL1.equals(expectedURL)) {
+            System.out.println("URLs match. Test passed!");
+        } else {
+            System.out.println("URLs do not match. Test failed!");
+            System.out.println("Expected URL: " + expectedURL);
+            System.out.println("Actual URL: " + URL1);
+        }
+        Thread.sleep(3000);
         clickElement(driver, LINK_LOCATOR);
         clickElement(driver, LOGOUT_LOCATOR);
     }
