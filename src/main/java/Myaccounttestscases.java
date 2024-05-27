@@ -1,13 +1,8 @@
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.File;
 import java.io.IOException;
-
-import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -116,12 +111,6 @@ public class Myaccounttestscases {
             WebElement confirmationInput = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/input[1]"));
             confirmationInput.sendKeys(confirmationCode);
             clickElement(driver, Next_LOCATOR);
-            Thread.sleep(2000);
-
-
-            //WebElement importbutton = driver.findElement(By.xpath("//label[1]"));
-
-            //importbutton.sendKeys("/Users/takiacademy/02.jpg");
 
 
             Thread.sleep(5000);
