@@ -1,5 +1,6 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,9 +14,9 @@ public class community {
     private static final String PWD_LOCATOR = "//input[@id='password']";
     private static final String LOGIN_LOCATOR = "//button[normalize-space()='Login']";
     private static final String PROFILE_LOCATOR = "//div[@class='user-info']";
-    private static final String LEFT_LOCATOR = "//img[@alt='left-arrow']";
+   //private static final String LEFT_LOCATOR = "//img[@alt='left-arrow']";
     private static final String SCROLL_LOCATOR = "//div[@class='swiper-slide swiper-slide-active']//div[@class='reel-info']";
-    private static final String SCROLLL_LOCATOR = "//div[@class='swiper-slide swiper-slide-duplicate swiper-slide-active']//div[@class='reel-info']";
+    private static final String SCROLLLL_LOCATOR = "//div[@class='swiper-slide swiper-slide-active']//div[@class='reel-info']";
     private static final String VIDEO_LOCATOR = "//span[normalize-space()='joao cancelo']";
 
     public static void main(String[] args) throws InterruptedException {
@@ -25,16 +26,16 @@ public class community {
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
         try {
-            communityy(driver);
+            community(driver);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
             driver.quit();
         }
     }
 
-    public static void communityy(WebDriver driver) throws InterruptedException {
+    public static void community(WebDriver driver) throws InterruptedException {
         driver.get(URL);
         fillForm(driver, "genox73126@grassdev.com", "12345Aa@");
         clickElement(driver, LOGIN_LOCATOR);
@@ -50,22 +51,22 @@ public class community {
         Thread.sleep(3000);
         clickElement(driver, PROFILE_LOCATOR);
         Thread.sleep(3000);
-        WebElement scroll = driver.findElement(By.xpath(SCROLL_LOCATOR));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", scroll);
-        WebElement left = driver.findElement(By.xpath(LEFT_LOCATOR));
-        Thread.sleep(2000);
-        for (int i = 0; i < 3; i++) {
-            left.click();
-            // Optionnel: Ajouter une petite pause entre les clics si nécessaire
-            Thread.sleep(500);
-    }
-        clickElement(driver, SCROLLL_LOCATOR);
-        Thread.sleep(2000);
+
+        WebElement scrollElement = driver.findElement(By.xpath(SCROLL_LOCATOR));
+        scrollToElement(driver, scrollElement);
+
+        WebElement videoElement = driver.findElement(By.xpath(SCROLLLL_LOCATOR));
+        swipeToElement(driver, scrollElement, videoElement);
+
+        Thread.sleep(200);
+        clickElement(driver, SCROLLLL_LOCATOR);
+        Thread.sleep(6000);
+
         WebElement video = driver.findElement(By.xpath(VIDEO_LOCATOR));
         scrollToElement(driver, video);
         clickElement(driver, VIDEO_LOCATOR);
     }
+
     private static void fillForm(WebDriver driver, String email, String password) {
         setInputValue(driver, EMAIL_LOCATOR, email);
         setInputValue(driver, PWD_LOCATOR, password);
@@ -86,10 +87,35 @@ public class community {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         }
     }
-    private static void scrollToElement(WebDriver driver, WebElement video) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", video);
+
+    private static void scrollToElement(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(video));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    private static void swipeToElement(WebDriver driver, WebElement scrollElement, WebElement targetElement) {
+        Actions actions = new Actions(driver);
+        boolean isElementVisible = false;
+
+        while (!isElementVisible) {
+            try {
+                if (targetElement.isDisplayed()) {
+                    isElementVisible = true;
+                } else {
+                    throw new NoSuchElementException("Element not visible");
+                }
+            } catch (NoSuchElementException e) {
+                actions.clickAndHold(scrollElement)
+                        .moveByOffset(200, 0) // Adjust the offset value as needed
+                        .release()
+                        .perform();
+                try {
+                    Thread.sleep(500);  // Pause to let the swipe action complete
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
+                }
+            }
+        }
+    }
 }
