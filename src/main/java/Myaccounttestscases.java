@@ -31,13 +31,14 @@ public class Myaccounttestscases {
     private static final String SUMMARY_LOCATOR = "//textarea[@id='about']";
     private static final String NEXTT_LOCATOR = "//button[normalize-space()='Next']";
     private static final String VERIFIER_LOCATOR = "//button[normalize-space()='Vérifier']";
+    private static final String ADD_LOCATOR = "(//span[@id='document-details'])[1]";
 
     public static void main(String[] args) throws Exception {
         //ScreenRecorderUtil.startRecord("main");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
         try {
             successfulsign(driver);
@@ -111,7 +112,8 @@ public class Myaccounttestscases {
             WebElement confirmationInput = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/input[1]"));
             confirmationInput.sendKeys(confirmationCode);
             clickElement(driver, Next_LOCATOR);
-
+            clickElement(driver, ADD_LOCATOR);
+            // Téléchargez l'image
 
             Thread.sleep(5000);
             clickElement(driver, NEXTT_LOCATOR);
@@ -127,15 +129,16 @@ public class Myaccounttestscases {
             driver.switchTo().window(anotherTab);
             // Log in to email account
             WebElement emaill = driver.findElement(By.xpath("(//input[@id=':r0:'])[1]"));
-            emaill.sendKeys(Keys.chord(Keys.META, "q"));
+            emaill.sendKeys(Keys.chord(Keys.META, "a"));
             emaill.sendKeys(Keys.BACK_SPACE);
-            emaill.sendKeys("hamzabouyahya198@gmail.com");
+            emaill.sendKeys("super@super.com");
             emaill.click();
             WebElement psd1 = driver.findElement(By.xpath("(//input[@id=':r1:'])[1]"));
-            psd1.sendKeys(Keys.chord(Keys.META, "q"));
+            psd1.sendKeys(Keys.chord(Keys.META, "a"));
             psd1.sendKeys(Keys.BACK_SPACE);
-            psd1.sendKeys("Super123");
+            psd1.sendKeys("super123");
             psd1.click();
+            Thread.sleep(2000);
             WebElement login1 = driver.findElement(By.xpath("(//button[normalize-space()='Connexion'])[1]"));
             login1.click();
             driver.findElement(By.xpath("//span[normalize-space()='Vérifications']")).click();

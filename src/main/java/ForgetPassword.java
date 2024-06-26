@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -75,17 +74,20 @@ public class ForgetPassword {
         if (confirmationCode != null) {
             // Switch back to the original window
             driver.switchTo().window(driver.getWindowHandles().iterator().next());
-            // Copy confirmation code to clipboard
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#ccd14709-5f0e-40cb-9fce-7e4a99136c54-0")));
-            WebElement confirmationInput = driver.findElement(By.cssSelector("#ccd14709-5f0e-40cb-9fce-7e4a99136c54-0"));
+            // Step 8: Use JavascriptExecutor to set the value of the confirmation input field
+            WebElement confirmationInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@id='b5a91e55-fbb0-4696-b77c-73f6d3952adb-0'])[1]")));
             confirmationInput.sendKeys(confirmationCode);
-            confirmationInput.click();
-            // Use Robot to paste the clipboard content
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
+//            // Copy confirmation code to clipboard
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@id='b5a91e55-fbb0-4696-b77c-73f6d3952adb-0'])[1]")));
+//            WebElement confirmationInput = driver.findElement(By.xpath("(//input[@id='b5a91e55-fbb0-4696-b77c-73f6d3952adb-0'])[1]"));
+//            confirmationInput.sendKeys(confirmationCode);
+//            confirmationInput.click();
+//            // Use Robot to paste the clipboard content
+//            Robot robot = new Robot();
+//            robot.keyPress(KeyEvent.VK_CONTROL);
+//            robot.keyPress(KeyEvent.VK_V);
+//            robot.keyRelease(KeyEvent.VK_V);
+//            robot.keyRelease(KeyEvent.VK_CONTROL);
             WebElement ok = driver.findElement(By.xpath("//button[normalize-space()='Next']"));
             ok.click();
             try {
