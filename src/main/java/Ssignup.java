@@ -36,7 +36,6 @@ public class Ssignup {
             e.printStackTrace();
         } finally {
             ScreenRecorderUtil.stopRecord();
-
             driver.quit();
         }
     }

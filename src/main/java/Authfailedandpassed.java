@@ -11,7 +11,7 @@ public class Authfailedandpassed {
         // Créer une instance du navigateur Chrome
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        ScreenRecorderUtil.startRecord("main");
+        //ScreenRecorderUtil.startRecord("main");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // Attente implicite globale
 
         // Ouvrir la page de connexion
@@ -23,11 +23,11 @@ public class Authfailedandpassed {
         // Cas d'authentification avec échec
         authentificationAvecEchec(driver, "yihog598961@losvtn.com", "1234587");
         // Fermer le navigateur
-        ScreenRecorderUtil.stopRecord();
+        //ScreenRecorderUtil.stopRecord();
         driver.quit();
     }
 
-    public static void authentificationAvecSucces(WebDriver driver, String username, String password) {
+    public static void authentificationAvecSucces(WebDriver driver, String username, String password) throws InterruptedException {
         // Trouver le champ de saisie de nom d'utilisateur
         WebElement usernameField = driver.findElement(By.xpath("//input[@id='email']"));
         // Saisir le nom d'utilisateur
@@ -40,6 +40,7 @@ public class Authfailedandpassed {
         WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Login']"));
         // Cliquer sur le bouton de connexion
         loginButton.click();
+        Thread.sleep(3000);
         // par exemple, l'élément qui s'affiche après une connexion réussie
         WebElement successElement = driver.findElement(By.xpath("//img[@alt='linkefoot-logo']"));
         if (successElement.isDisplayed()) {
@@ -50,7 +51,7 @@ public class Authfailedandpassed {
         driver.findElement(By.xpath("//button[normalize-space()='Logout']")).click();
     }
 
-    public static void authentificationAvecEchec(WebDriver driver, String username, String password) {
+    public static void authentificationAvecEchec(WebDriver driver, String username, String password) throws InterruptedException {
         // Trouver le champ de saisie de nom d'utilisateur
         WebElement usernameField = driver.findElement(By.xpath("//input[@id='email']"));
         // Saisir le nom d'utilisateur
@@ -63,6 +64,7 @@ public class Authfailedandpassed {
         WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Login']"));
         // Cliquer sur le bouton de connexion
         loginButton.click();
+        Thread.sleep(3000);
         // Vérifier si l'authentification a échoué en vérifiant la présence d'un message d'erreur sur la page de connexion
         try {
             WebElement errorElement = driver.findElement(By.xpath("//p[@class=' error-message']"));
@@ -72,5 +74,7 @@ public class Authfailedandpassed {
         } catch (Exception e) {
             System.out.println("L'authentification a réussi, alors qu'elle aurait dû échouer !");
         }
+        driver.close();
     }
+
 }
