@@ -15,7 +15,7 @@ public class Login {
     public static void main(String[] args) throws Exception {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        ScreenRecorderUtil.startRecord("main");
+        //ScreenRecorderUtil.startRecord("main");
         try {
             successfulLogin(driver);
             Thread.sleep(3000);
@@ -30,7 +30,7 @@ public class Login {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ScreenRecorderUtil.stopRecord();
+            //ScreenRecorderUtil.stopRecord();
             driver.quit();
         }
 }
