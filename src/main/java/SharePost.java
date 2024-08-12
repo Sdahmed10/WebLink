@@ -43,7 +43,7 @@ public class SharePost {
         WebElement calendar = driver.findElement(By.xpath("//div[contains(@class,'ant-picker-input')]"));
         calendar.click();
         Thread.sleep(1000);
-        WebElement calendarDate = driver.findElement(By.xpath("//td[contains(@title,'2024-07-10')]//div[contains(@class,'ant-picker-cell-inner')][normalize-space()='10']"));
+        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-08-06']//div[@class='ant-picker-cell-inner'][normalize-space()='6']"));
         calendarDate.click();
         Thread.sleep(1000);
         WebElement score = driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div/div/div[2]/img[2]"));
