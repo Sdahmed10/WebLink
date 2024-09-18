@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,11 +26,11 @@ public class ForgetPassword {
         driver.findElement(By.xpath("//span[normalize-space()='Forgot password ?']")).click();
         Thread.sleep(5000);
         WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
-        email.sendKeys("ahmedsdiri+16@takiacademyteam.com");
+        email.sendKeys("ahmedsdiri+1190@takiacademyteam.com");
         email.click();
         driver.findElement(By.xpath("//button[normalize-space()='Next']")).click();
         Thread.sleep(3000);
-        driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='auth-main-layout']/div[@class='confirmation-account-container auth-main-container']/div[@class=' confirmation-cards']/div[2]")).click();
+        driver.findElement(By.xpath("//img[contains(@alt,'arrow-right-icon')]")).click();
         // Initialisez le JavascriptExecutor
         JavascriptExecutor js = (JavascriptExecutor) driver;
         // Exécutez du JavaScript pour ouvrir une nouvelle fenêtre
@@ -55,7 +57,7 @@ public class ForgetPassword {
         Thread.sleep(3000);
         WebElement msg = driver.findElement(By.xpath("(//div[@class='XG5Jd TszOG'])[1]"));
         msg.click();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         // Recherchez l'élément contenant le code de confirmation
         WebElement confirmationElement = driver.findElement(By.xpath("//p[1]"));
         Thread.sleep(2000);
@@ -71,25 +73,36 @@ public class ForgetPassword {
         } else {
             System.out.println("Aucun code de confirmation trouvé.");
         }
-        if (confirmationCode != null) {
+
             // Switch back to the original window
+            // After switching back to the original window
             driver.switchTo().window(driver.getWindowHandles().iterator().next());
-            // Step 8: Use JavascriptExecutor to set the value of the confirmation input field
-            WebElement confirmationInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@id='b5a91e55-fbb0-4696-b77c-73f6d3952adb-0'])[1]")));
-            confirmationInput.sendKeys(confirmationCode);
-//            // Copy confirmation code to clipboard
-//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@id='b5a91e55-fbb0-4696-b77c-73f6d3952adb-0'])[1]")));
-//            WebElement confirmationInput = driver.findElement(By.xpath("(//input[@id='b5a91e55-fbb0-4696-b77c-73f6d3952adb-0'])[1]"));
-//            confirmationInput.sendKeys(confirmationCode);
-//            confirmationInput.click();
-//            // Use Robot to paste the clipboard content
-//            Robot robot = new Robot();
-//            robot.keyPress(KeyEvent.VK_CONTROL);
-//            robot.keyPress(KeyEvent.VK_V);
-//            robot.keyRelease(KeyEvent.VK_V);
-//            robot.keyRelease(KeyEvent.VK_CONTROL);
-            WebElement ok = driver.findElement(By.xpath("//button[normalize-space()='Next']"));
-            ok.click();
+
+
+// Define the locators for each input field if they have specific attributes or positions
+// Adjust these locators based on the actual attributes or structure
+            WebElement inputField1 = driver.findElement(By.xpath("//input[@id='input-field-1']"));
+            WebElement inputField2 = driver.findElement(By.xpath("//input[@id='input-field-2']"));
+            WebElement inputField3 = driver.findElement(By.xpath("//input[@id='input-field-3']"));
+            WebElement inputField4 = driver.findElement(By.xpath("//input[@id='input-field-4']"));
+            WebElement inputField5 = driver.findElement(By.xpath("//input[@id='input-field-5']"));
+            WebElement inputField6 = driver.findElement(By.xpath("//input[@id='input-field-6']"));
+
+// List of input fields
+            List<WebElement> codeInputs = Arrays.asList(inputField1, inputField2, inputField3, inputField4, inputField5, inputField6);
+
+// Ensure the confirmation code is 6 digits
+            if (confirmationCode != null && confirmationCode.length() == 6 && codeInputs.size() == 6) {
+                for (int i = 0; i < confirmationCode.length(); i++) {
+                    // Send each digit to the respective input field
+                    codeInputs.get(i).sendKeys(String.valueOf(confirmationCode.charAt(i)));
+                }
+
+
+            // Optionally click the Next or Confirm button after entering the code
+            WebElement nextButton = driver.findElement(By.xpath("//button[normalize-space()='Next']"));
+            nextButton.click();
+
             try {
                 System.out.println("Réinitialisation du mot de passe réussie !");
             } catch (Exception e) {
@@ -100,7 +113,63 @@ public class ForgetPassword {
                 // Close the browser regardless of success or failure
                 driver.quit();
             }
+        } else {
+            System.out.println("Le code ou les champs d'entrée ne sont pas valides.");
         }
+
+
+        // Optionally click the Next or Confirm button after entering the code
+        WebElement nextButton = driver.findElement(By.xpath("//button[normalize-space()='Next']"));
+        nextButton.click();
+
+//        try {
+//            System.out.println("Réinitialisation du mot de passe réussie !");
+//        } catch (Exception e) {
+//            // If any exception occurs, print a failure message
+//            System.out.println("Échec de la réinitialisation du mot de passe : " + e.getMessage());
+//        } finally {
+//            Thread.sleep(5000);
+//            // Close the browser regardless of success or failure
+//            driver.quit();
+//        }
+//    } else {
+//        System.out.println("Le code ou les champs d'entrée ne sont pas valides.");
+//    }
+//
+//
+//
+//            // Optionally click the Next or Confirm button after entering the code
+//                WebElement nextButton = driver.findElement(By.xpath("//button[normalize-space()='Next']"));
+//                nextButton.click();
+//
+//                try {
+//                    System.out.println("Réinitialisation du mot de passe réussie !");
+//                } catch (Exception e) {
+//                    // If any exception occurs, print a failure message
+//                    System.out.println("Échec de la réinitialisation du mot de passe : " + e.getMessage());
+//                } finally {
+//                    Thread.sleep(5000);
+//                    // Close the browser regardless of success or failure
+//                    driver.quit();
+//                }
+//            } else {
+//                System.out.println("Le code ou les champs d'entrée ne sont pas valides.");
+//            }
+//
+//
+//            WebElement ok = driver.findElement(By.xpath("//button[normalize-space()='Next']"));
+//            ok.click();
+//            try {
+//                System.out.println("Réinitialisation du mot de passe réussie !");
+//            } catch (Exception e) {
+//                // If any exception occurs, print a failure message
+//                System.out.println("Échec de la réinitialisation du mot de passe : " + e.getMessage());
+//            } finally {
+//                Thread.sleep(5000);
+//                // Close the browser regardless of success or failure
+//                driver.quit();
+//            }
+//        }
     }
     }
 
