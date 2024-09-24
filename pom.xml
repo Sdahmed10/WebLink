@@ -19,8 +19,9 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.24.0</version>
+            <version>4.25.0</version>
         </dependency>
+
 
 
 
@@ -54,6 +55,12 @@
             <version>0.7.7.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.scala-js/scalajs-library -->
+        <dependency>
+            <groupId>org.scala-js</groupId>
+            <artifactId>scalajs-library_2.13</artifactId>
+            <version>1.16.0</version>
+        </dependency>
 
 
     </dependencies>

@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -43,7 +44,7 @@ public class SharePost {
         WebElement calendar = driver.findElement(By.xpath("//div[contains(@class,'ant-picker-input')]"));
         calendar.click();
         Thread.sleep(1000);
-        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-08-06']//div[@class='ant-picker-cell-inner'][normalize-space()='6']"));
+        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-09-08']//div[@class='ant-picker-cell-inner'][normalize-space()='8']"));
         calendarDate.click();
         Thread.sleep(1000);
         WebElement score = driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div/div/div[2]/img[2]"));
@@ -74,13 +75,18 @@ public class SharePost {
         WebElement locator = driver.findElement(By.xpath("//span[normalize-space()='Ajouter un localisation du stade']"));
         locator.click();
         Thread.sleep(2000);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        // Simuler un clic sur la position (100, 100) par exemple
+        js.executeScript("document.elementFromPoint(100, 100).click();");
+
         WebElement search = driver.findElement(By.xpath("//input[@placeholder='Search an address']"));
         search.sendKeys("sousse,tunisie");
         search.click();
         Thread.sleep(2000);
-        WebElement clickk = driver.findElement(By.xpath("//*[@id=\"636688316\"]/span"));
+        WebElement clickk = driver.findElement(By.xpath("//div[@class='search-map__pop-over']//div[1]//p[1]"));
         clickk.click();
-        driver.findElement(By.xpath("//button[normalize-space()='Sauvegarder la localisation']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[normalize-space()='Save position']")).click();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         Thread.sleep(3000);
@@ -104,7 +110,7 @@ public class SharePost {
         WebElement calendar = driver.findElement(By.xpath("//div[contains(@class,'ant-picker-input')]"));
         calendar.click();
         Thread.sleep(1000);
-        WebElement calendarDate = driver.findElement(By.xpath("//td[contains(@title,'2024-07-10')]//div[contains(@class,'ant-picker-cell-inner')][normalize-space()='10']"));
+        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-09-08']//div[@class='ant-picker-cell-inner'][normalize-space()='8']"));
         calendarDate.click();
         Thread.sleep(1000);
         WebElement score = driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div/div/div[2]/img[2]"));
