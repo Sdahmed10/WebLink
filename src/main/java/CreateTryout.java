@@ -3,7 +3,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -14,7 +16,9 @@ public class CreateTryout {
     private WebDriverWait wait;
 
     public CreateTryout() {
-        driver = new ChromeDriver();
+        //driver = new ChromeDriver();
+        //driver = new SafariDriver();
+        driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(500));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
@@ -194,7 +198,7 @@ public class CreateTryout {
         CreateTryout.login();
         // Appel du premier scénario
         CreateTryout.successPublishtryout();
-         //Appel du deuxième scénario
+        //Appel du deuxième scénario
         CreateTryout.sharepostfailed();
     }
 }
