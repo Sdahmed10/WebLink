@@ -3,27 +3,45 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateTryout {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public CreateTryout() {
-        //driver = new ChromeDriver();
+    @BeforeClass
+    public void CreateTryout() {
+        //Create a map to store  preferences
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        //add key and value to map as follow to switch off browser notification
+        //Pass the argument 1 to allow and 2 to block
+        prefs.put("profile.default_content_setting_values.notifications", 1);
+        //Create an instance of ChromeOptions
+        ChromeOptions options = new ChromeOptions();
+        // set ExperimentalOption - prefs
+        options.setExperimentalOption("prefs", prefs);
+        //Now Pass ChromeOptions instance to ChromeDriver Constructor to initialize chrome driver which will switch off this browser notification on the chrome browser
+        driver = new ChromeDriver(options);
         //driver = new SafariDriver();
-        driver = new FirefoxDriver();
+        //driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(500));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
     }
+    @Test(priority = 1)
     public void login() throws InterruptedException {
         Thread.sleep(1000);
         WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
@@ -35,6 +53,7 @@ public class CreateTryout {
         WebElement login = driver.findElement(By.xpath("//*[@id=\"light\"]/div/div/form/button"));
         login.click();
     }
+    @Test(priority = 2)
     public void successPublishtryout() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(By.xpath("//a[normalize-space()='Tryouts']")).click();
@@ -111,6 +130,7 @@ public class CreateTryout {
 //        String actualUrl = driver.getCurrentUrl();
 //        Assert.assertEquals(actualUrl, expectedUrl, "Tryout created successfully");
     }
+    @Test(priority = 3)
     public void sharepostfailed() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(By.xpath("//a[normalize-space()='Tryouts']")).click();
@@ -200,5 +220,10 @@ public class CreateTryout {
         CreateTryout.successPublishtryout();
         //Appel du deuxième scénario
         CreateTryout.sharepostfailed();
+    }
+    @AfterClass
+    public void tearDown() {
+        driver.close();
+        System.out.println("Test completed successfully");
     }
 }

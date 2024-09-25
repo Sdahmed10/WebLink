@@ -1,9 +1,8 @@
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -13,8 +12,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login1 {
 
@@ -22,13 +23,22 @@ public class Login1 {
     WebDriver driver;
     WebDriverWait wait;
 
-
     @BeforeClass
     public void setUp() {
-        //driver = new ChromeDriver();
-        driver = new FirefoxDriver();
+        //driver = new FirefoxDriver();
+        //Create a map to store  preferences
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        //add key and value to map as follow to switch off browser notification
+        //Pass the argument 1 to allow and 2 to block
+        prefs.put("profile.default_content_setting_values.notifications", 1);
+        //Create an instance of ChromeOptions
+        ChromeOptions options = new ChromeOptions();
+        // set ExperimentalOption - prefs
+        options.setExperimentalOption("prefs", prefs);
+        //Now Pass ChromeOptions instance to ChromeDriver Constructor to initialize chrome driver which will switch off this browser notification on the chrome browser
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Attendre 10 secondes maximum pour les éléments
-        driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");  // l'URL de votre application
+        driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }
@@ -126,7 +136,8 @@ public class Login1 {
 
     @AfterClass
     public void tearDown() {
-        driver.quit();
+        driver.close();
+        System.out.println("Test completed successfully");
     }
 }
 
