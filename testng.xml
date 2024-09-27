@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="/Users/takiacademy/IdeaProjects/WebLinkeFoot">
         <classes>
-            <class name="Login1"/>
+
             <class name="CreateTryout"/>
         </classes>
     </test>

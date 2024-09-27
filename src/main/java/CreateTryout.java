@@ -12,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class CreateTryout {
     private WebDriverWait wait;
 
     @BeforeClass
-    public void CreateTryout() {
+    public void Setup() {
         //Create a map to store  preferences
         Map<String, Object> prefs = new HashMap<String, Object>();
         //add key and value to map as follow to switch off browser notification
@@ -36,11 +35,12 @@ public class CreateTryout {
         driver = new ChromeDriver(options);
         //driver = new SafariDriver();
         //driver = new FirefoxDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(500));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
     }
+
     @Test(priority = 1)
     public void login() throws InterruptedException {
         Thread.sleep(1000);
@@ -53,6 +53,7 @@ public class CreateTryout {
         WebElement login = driver.findElement(By.xpath("//*[@id=\"light\"]/div/div/form/button"));
         login.click();
     }
+
     @Test(priority = 2)
     public void successPublishtryout() throws InterruptedException {
         Thread.sleep(3000);
@@ -102,10 +103,10 @@ public class CreateTryout {
         WebElement date = driver.findElement(By.xpath("//div[@class='ant-picker-input']"));
         date.click();
         Thread.sleep(2000);
-        WebElement date1= driver.findElement(By.xpath("//div[@class='ant-picker-input']"));
+        WebElement date1 = driver.findElement(By.xpath("//div[@class='ant-picker-input']"));
         date1.click();
         Thread.sleep(1000);
-        WebElement date3 = driver.findElement(By.xpath("//div[normalize-space()='25']"));
+        WebElement date3 = driver.findElement(By.xpath("//div[normalize-space()='27']"));
         date3.click();
         Thread.sleep(1000);
         WebElement MiniAge = driver.findElement(By.xpath("//div[7]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]"));
@@ -130,6 +131,7 @@ public class CreateTryout {
 //        String actualUrl = driver.getCurrentUrl();
 //        Assert.assertEquals(actualUrl, expectedUrl, "Tryout created successfully");
     }
+
     @Test(priority = 3)
     public void sharepostfailed() throws InterruptedException {
         Thread.sleep(3000);
@@ -178,8 +180,8 @@ public class CreateTryout {
         Thread.sleep(2000);
         WebElement date1 = driver.findElement(By.xpath("//div[@class='ant-picker-input']"));
         date1.click();
-        Thread.sleep(1000);
-        WebElement date3 = driver.findElement(By.xpath("//div[normalize-space()='25']"));
+        Thread.sleep(2000);
+        WebElement date3 = driver.findElement(By.xpath("//div[normalize-space()='28']"));
         date3.click();
         Thread.sleep(1000);
         WebElement MiniAge = driver.findElement(By.xpath("//div[7]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]"));
@@ -213,6 +215,7 @@ public class CreateTryout {
         Assert.assertTrue(participantsErrorMessage.isDisplayed(), "Le message d'erreur pour le champ 'Max Participants' n'est pas affiché");
 
     }
+
     public static void main(String[] args) throws InterruptedException {
         CreateTryout CreateTryout = new CreateTryout();
         CreateTryout.login();
@@ -221,6 +224,7 @@ public class CreateTryout {
         //Appel du deuxième scénario
         CreateTryout.sharepostfailed();
     }
+
     @AfterClass
     public void tearDown() {
         driver.close();

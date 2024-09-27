@@ -2,11 +2,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
 public class Authfailedandpassed {
-
+@BeforeClass
     public static void main(String[] args) throws Exception {
         // Créer une instance du navigateur Chrome
         WebDriver driver = new ChromeDriver();
@@ -26,7 +28,7 @@ public class Authfailedandpassed {
         //ScreenRecorderUtil.stopRecord();
         driver.quit();
     }
-
+@Test
     public static void authentificationAvecSucces(WebDriver driver, String username, String password) throws InterruptedException {
         // Trouver le champ de saisie de nom d'utilisateur
         WebElement usernameField = driver.findElement(By.xpath("//input[@id='email']"));
@@ -50,7 +52,7 @@ public class Authfailedandpassed {
         }
         driver.findElement(By.xpath("//button[normalize-space()='Logout']")).click();
     }
-
+@Test
     public static void authentificationAvecEchec(WebDriver driver, String username, String password) throws InterruptedException {
         // Trouver le champ de saisie de nom d'utilisateur
         WebElement usernameField = driver.findElement(By.xpath("//input[@id='email']"));

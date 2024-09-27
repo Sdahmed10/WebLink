@@ -22,7 +22,7 @@ public class editprofile {
 
 
     public static void main(String[] args) throws Exception {
-        ScreenRecorderUtil.startRecord("main");
+        //ScreenRecorderUtil.startRecord("main");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
@@ -39,41 +39,42 @@ public class editprofile {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            ScreenRecorderUtil.stopRecord();
+            //ScreenRecorderUtil.stopRecord();
             driver.quit();
         }
 
     }
 
-    public static void successfuledit(WebDriver driver) {
+    public static void successfuledit(WebDriver driver) throws InterruptedException {
         driver.get(URL);
         fillForm(driver, "genox73126@grassdev.com", "12345Aa@");
         clickElement(driver, LOGIN_LOCATOR);
         clickElement(driver, MYACCOUNT_LOCATOR);
         WebElement usernameField = driver.findElement(By.xpath(USERNAME_LOCATOR));
-        usernameField.sendKeys(Keys.chord(Keys.META, "a"));
+        usernameField.sendKeys(Keys.chord(Keys.META, "q"));
         usernameField.sendKeys(Keys.BACK_SPACE);
         usernameField.sendKeys("Olympique Lyonnais");
         clickElement(driver, YEAR_LOCATOR);
         WebElement yearField = driver.findElement(By.xpath(YEAR_LOCATOR));
-        yearField.sendKeys(Keys.chord(Keys.META, "a"));
+        yearField.sendKeys(Keys.chord(Keys.META, "q"));
         yearField.sendKeys(Keys.BACK_SPACE);
         yearField.sendKeys("1900");
         clickElement(driver, TITLES_LOCATOR);
         WebElement titlesfield = driver.findElement(By.xpath(TITLES_LOCATOR));
-        titlesfield.sendKeys(Keys.chord(Keys.META, "a"));
+        titlesfield.sendKeys(Keys.chord(Keys.META, "q"));
         titlesfield.sendKeys(Keys.BACK_SPACE);
         titlesfield.sendKeys("1");
         clickElement(driver, CITY_LOCATOR);
         WebElement cityfield = driver.findElement(By.xpath(CITY_LOCATOR));
-        cityfield.sendKeys(Keys.chord(Keys.META, "a"));
+        cityfield.sendKeys(Keys.chord(Keys.META, "q"));
         cityfield.sendKeys(Keys.BACK_SPACE);
         cityfield.sendKeys("LYON");
         clickElement(driver, SUMMARY_LOCATOR);
         WebElement summaryfield = driver.findElement(By.xpath(SUMMARY_LOCATOR));
-        summaryfield.sendKeys(Keys.chord(Keys.META, "a"));
+        summaryfield.sendKeys(Keys.chord(Keys.META, "q"));
         summaryfield.sendKeys(Keys.BACK_SPACE);
         summaryfield.sendKeys("Test");
+        Thread.sleep(2000);
         clickElement(driver, SAVE_LOCATOR);
         String expectedURL = "https://devlinkfootweb.softylines.com/profile";
         // Compare the expected URL with the actual URL
