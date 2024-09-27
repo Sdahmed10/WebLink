@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -55,9 +56,9 @@ public class CreateGame {
         Thread.sleep(1000);
         WebElement create = driver.findElement(By.xpath("//button[normalize-space()='create new game']"));
         create.click();
-        Thread.sleep(20000);
+        Thread.sleep(2000);
         WebElement club = driver.findElement(By.cssSelector("#rc_select_0"));
-        club.sendKeys("eve");
+        club.sendKeys("metz");
         club.click();
         Thread.sleep(2000);
         WebElement everton = driver.findElement(By.xpath("//div[@class='shared-async-select__option']"));
@@ -97,7 +98,7 @@ public class CreateGame {
         Thread.sleep(2000);
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Match Date']"));
         date.click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-09-29'] div[class='ant-picker-cell-inner']"));
         date3.click();
         Thread.sleep(1000);
@@ -129,9 +130,11 @@ public class CreateGame {
         Thread.sleep(1000);
         WebElement create = driver.findElement(By.xpath("//button[normalize-space()='create new game']"));
         create.click();
-        Thread.sleep(20000);
-        WebElement club = driver.findElement(By.cssSelector("#rc_select_0"));
-        club.sendKeys("eve");
+        Thread.sleep(2000);
+        WebElement club = driver.findElement(By.cssSelector("input[type='search']"));
+
+//        WebElement club = driver.findElement(By.xpath("//input[type='search']"));
+        club.sendKeys("metz");
         club.click();
         Thread.sleep(2000);
         WebElement everton = driver.findElement(By.xpath("//div[@class='shared-async-select__option']"));
@@ -171,25 +174,31 @@ public class CreateGame {
         Thread.sleep(2000);
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Match Date']"));
         date.click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-09-29'] div[class='ant-picker-cell-inner']"));
         date3.click();
         Thread.sleep(1000);
         WebElement publish = driver.findElement(By.xpath("//button[normalize-space()='publish']"));
         publish.click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         try {
             // Attendre que le résultat soit visible (par exemple, un message de confirmation)
-            WebElement Modifierlematch = driver.findElement(By.xpath("//button[normalize-space()='Modifier le match']"));
+            WebElement Modifierlematch = driver.findElement(By.xpath("//p[normalize-space()='required match description']"));
+            Thread.sleep(3000);
             // Vérifier que le message de succès est affiché
             if (Modifierlematch.isDisplayed()) {
-                System.out.println("La création du jeu a été confirmée avec succès.");
+                System.out.println("Échec de la confirmation de la création du jeu. ");
             } else {
-                System.out.println("Échec de la confirmation de la création du jeu.");
+                System.out.println("La création du jeu a été confirmée avec succès.");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @AfterClass
+    public void tearDown() {
+        driver.close();
+        System.out.println("Test completed successfully");
     }
 }
 

@@ -54,14 +54,14 @@ public class CreateTryout {
         login.click();
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void successPublishtryout() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(By.xpath("//a[normalize-space()='Tryouts']")).click();
         Thread.sleep(1000);
         driver.findElement(By.xpath("//button[normalize-space()='create new essay']")).click();
-        Thread.sleep(1000);
-        WebElement title = driver.findElement(By.xpath("//textarea[@placeholder='Title']"));
+        Thread.sleep(2000);
+        WebElement title = driver.findElement(By.xpath("//textarea[@placeholder='Tryout Title']"));
         title.sendKeys("Tryout test");
         title.click();
         Thread.sleep(1000);
@@ -95,9 +95,9 @@ public class CreateTryout {
         adress.sendKeys("sousse,tunisie");
         adress.click();
         Thread.sleep(2000);
-        WebElement location = driver.findElement(By.xpath("//p[normalize-space()='Sousse, Tunisie']"));
-        location.click();
-        Thread.sleep(2000);
+//        WebElement location = driver.findElement(By.xpath("//p[normalize-space()='Sousse, Tunisie']"));
+//        location.click();
+//        Thread.sleep(2000);
         driver.findElement(By.xpath("//button[normalize-space()='Save position']")).click();
         Thread.sleep(1000);
         WebElement date = driver.findElement(By.xpath("//div[@class='ant-picker-input']"));
@@ -132,7 +132,7 @@ public class CreateTryout {
 //        Assert.assertEquals(actualUrl, expectedUrl, "Tryout created successfully");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void sharepostfailed() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(By.xpath("//a[normalize-space()='Tryouts']")).click();
@@ -216,14 +216,7 @@ public class CreateTryout {
 
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        CreateTryout CreateTryout = new CreateTryout();
-        CreateTryout.login();
-        // Appel du premier scénario
-        CreateTryout.successPublishtryout();
-        //Appel du deuxième scénario
-        CreateTryout.sharepostfailed();
-    }
+
 
     @AfterClass
     public void tearDown() {
