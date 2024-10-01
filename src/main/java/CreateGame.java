@@ -97,7 +97,7 @@ public class CreateGame {
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Match Date']"));
         date.click();
         Thread.sleep(2000);
-        WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-09-29'] div[class='ant-picker-cell-inner']"));
+        WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']"));
         date3.click();
         Thread.sleep(1000);
         WebElement description = driver.findElement(By.xpath("//textarea[@placeholder='Description']"));
@@ -173,7 +173,7 @@ public class CreateGame {
         WebElement date = driver.findElement(By.xpath("//input[@placeholder='Match Date']"));
         date.click();
         Thread.sleep(2000);
-        WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-09-29'] div[class='ant-picker-cell-inner']"));
+        WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']"));
         date3.click();
         Thread.sleep(1000);
         WebElement publish = driver.findElement(By.xpath("//button[normalize-space()='publish']"));

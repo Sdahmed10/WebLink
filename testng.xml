@@ -4,6 +4,7 @@
     <test verbose="2" preserve-order="true" name="/Users/takiacademy/IdeaProjects/WebLinkeFoot">
         <classes>
             <class name="Login1"/>
+            <class name="CreateTryout"/>
             <class name="CreateGame"/>
             <class name="CreateRecruitement"/>
         </classes>
