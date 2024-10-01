@@ -95,9 +95,7 @@ public class CreateTryout {
         adress.sendKeys("sousse,tunisie");
         adress.click();
         Thread.sleep(2000);
-//        WebElement location = driver.findElement(By.xpath("//p[normalize-space()='Sousse, Tunisie']"));
-//        location.click();
-//        Thread.sleep(2000);
+//
         driver.findElement(By.xpath("//button[normalize-space()='Save position']")).click();
         Thread.sleep(1000);
         WebElement date = driver.findElement(By.xpath("//div[@class='ant-picker-input']"));

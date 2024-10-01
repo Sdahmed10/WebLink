@@ -1,18 +1,11 @@
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -127,7 +120,7 @@ public class CreateGame {
             e.printStackTrace();
         }
     }
-
+    
     @Test(priority = 3)
     public void FailedPublishgame() throws InterruptedException {
         Thread.sleep(3000);
