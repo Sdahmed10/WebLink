@@ -34,8 +34,8 @@ public class Login1 {
         // set ExperimentalOption - prefs
         options.setExperimentalOption("prefs", prefs);
         //Now Pass ChromeOptions instance to ChromeDriver Constructor to initialize chrome driver which will switch off this browser notification on the chrome browser
-        //driver = new ChromeDriver(options);
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver(options);
+        //driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // Attendre 10 secondes maximum pour les éléments
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
         driver.manage().deleteAllCookies();

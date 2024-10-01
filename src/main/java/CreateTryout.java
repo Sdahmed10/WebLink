@@ -40,7 +40,6 @@ public class CreateTryout {
         driver.manage().deleteAllCookies();
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
     }
-
     @Test(priority = 1)
     public void login() throws InterruptedException {
         Thread.sleep(1000);
@@ -88,7 +87,7 @@ public class CreateTryout {
         Actions actions = new Actions(driver);
         actions.moveByOffset(0, 0).click().perform();  // Cliquer dans le coin supérieur gauche de la page
         Thread.sleep(1000);
-        WebElement search = driver.findElement(By.xpath("//*[name()='rect' and contains(@width,'11')]"));
+        WebElement search = driver.findElement(By.xpath("//input[@placeholder='Stadium']"));
         search.click();
         Thread.sleep(2000);
         WebElement adress = driver.findElement(By.xpath("//input[@placeholder='Search an address']"));
@@ -129,7 +128,6 @@ public class CreateTryout {
 //        String actualUrl = driver.getCurrentUrl();
 //        Assert.assertEquals(actualUrl, expectedUrl, "Tryout created successfully");
     }
-
     @Test(priority = 2)
     public void sharepostfailed() throws InterruptedException {
         Thread.sleep(3000);
@@ -164,7 +162,7 @@ public class CreateTryout {
         Actions actions = new Actions(driver);
         actions.moveByOffset(0, 0).click().perform();  // Cliquer dans le coin supérieur gauche de la page
         Thread.sleep(1000);
-        WebElement search = driver.findElement(By.xpath("//*[name()='rect' and contains(@width,'11')]"));
+        WebElement search = driver.findElement(By.xpath("//input[@placeholder='Stadium']"));
         search.click();
         Thread.sleep(2000);
         WebElement adress = driver.findElement(By.xpath("//input[@placeholder='Search an address']"));
@@ -213,9 +211,6 @@ public class CreateTryout {
         Assert.assertTrue(participantsErrorMessage.isDisplayed(), "Le message d'erreur pour le champ 'Max Participants' n'est pas affiché");
 
     }
-
-
-
     @AfterClass
     public void tearDown() {
         driver.close();
