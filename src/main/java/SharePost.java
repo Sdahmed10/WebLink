@@ -44,7 +44,7 @@ public class SharePost {
         WebElement calendar = driver.findElement(By.xpath("//div[contains(@class,'ant-picker-input')]"));
         calendar.click();
         Thread.sleep(1000);
-        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-09-08']//div[@class='ant-picker-cell-inner'][normalize-space()='8']"));
+        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-10-02']//div[@class='ant-picker-cell-inner'][normalize-space()='2']"));
         calendarDate.click();
         Thread.sleep(1000);
         WebElement score = driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div/div/div[2]/img[2]"));
@@ -110,7 +110,7 @@ public class SharePost {
         WebElement calendar = driver.findElement(By.xpath("//div[contains(@class,'ant-picker-input')]"));
         calendar.click();
         Thread.sleep(1000);
-        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-09-08']//div[@class='ant-picker-cell-inner'][normalize-space()='8']"));
+        WebElement calendarDate = driver.findElement(By.xpath("//td[@title='2024-10-02']//div[@class='ant-picker-cell-inner'][normalize-space()='2']"));
         calendarDate.click();
         Thread.sleep(1000);
         WebElement score = driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/div/form/div/div[2]/div/div/div[2]/img[2]"));
