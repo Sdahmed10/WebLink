@@ -53,12 +53,12 @@ public class CreateTryout {
         login.click();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void successPublishtryout() throws InterruptedException {
         Thread.sleep(3000);
-        driver.findElement(By.xpath("//a[normalize-space()='Tryouts']")).click();
+        driver.findElement(By.xpath("//div[@class='user-info']")).click();
         Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[normalize-space()='create new essay']")).click();
+        driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout my-profile-wrapper']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='my-profile-container']/div[@class='my-profile-section my-profile-section__user-events']/div[@class='club-event-container']/p[2]/span[1]")).click();
         Thread.sleep(2000);
         WebElement title = driver.findElement(By.xpath("//textarea[@placeholder='Tryout Title']"));
         title.sendKeys("Tryout test");
@@ -128,12 +128,12 @@ public class CreateTryout {
 //        String actualUrl = driver.getCurrentUrl();
 //        Assert.assertEquals(actualUrl, expectedUrl, "Tryout created successfully");
     }
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void sharepostfailed() throws InterruptedException {
         Thread.sleep(3000);
-        driver.findElement(By.xpath("//a[normalize-space()='Tryouts']")).click();
+        driver.findElement(By.xpath("//div[@class='user-info']")).click();
         Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[normalize-space()='create new essay']")).click();
+        driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout my-profile-wrapper']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='my-profile-container']/div[@class='my-profile-section my-profile-section__user-events']/div[@class='club-event-container']/p[2]/span[1]")).click();
         Thread.sleep(1000);
 //        WebElement title = driver.findElement(By.xpath("//textarea[@placeholder='Title']"));
 //        title.sendKeys("Tryout test");
