@@ -6,12 +6,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class SharePost {
+public class Sharescorecard {
     private WebDriver driver;
     private WebDriverWait wait;
 
 
-    public SharePost() {
+    public Sharescorecard() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(500));
         driver.manage().window().maximize();
@@ -141,7 +141,7 @@ public class SharePost {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        SharePost sharePost = new SharePost();
+        Sharescorecard sharePost = new Sharescorecard();
         sharePost.login();
         // Appel du premier scénario
         sharePost.scenario1sharepostsuccess();
