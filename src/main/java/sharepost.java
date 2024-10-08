@@ -5,6 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -14,16 +17,13 @@ public class sharepost {
     private WebDriver driver;
     private WebDriverWait wait;
 
+   
     public void setUp() {
-        //Create a map to store  preferences
-        Map<String, Object> prefs = new HashMap<String, Object>();
-        //Pass the argument 1 to allow and 2 to block
+        //Create a map to store preferences
+        Map<String, Object> prefs = new HashMap<>();
         prefs.put("profile.default_content_setting_values.notifications", 1);
-        //Create an instance of ChromeOptions
         ChromeOptions options = new ChromeOptions();
-        // set ExperimentalOption - prefs
         options.setExperimentalOption("prefs", prefs);
-        //Now Pass ChromeOptions instance to ChromeDriver Constructor to initialize chrome driver which will switch off this browser notification on the chrome browser
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
@@ -31,53 +31,53 @@ public class sharepost {
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
     }
 
-    public void tearDown() {
-        // Close the browser
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
-    public void login() throws InterruptedException {
-        Thread.sleep(3000);
-        WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
+    public void login() {
+        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
         email.sendKeys("neyad39254@paxnw.com");
-        email.click();
-        WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
+        WebElement password = driver.findElement(By.id("password"));
         password.sendKeys("12345Aa@");
-        password.click();
-        WebElement login = driver.findElement(By.xpath("//*[@id=\"light\"]/div/div/form/button"));
-        login.click();
+        WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"light\"]/div/div/form/button"));
+        loginButton.click();
     }
 
-    public void successsharepost() throws InterruptedException {
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//a[normalize-space()='Community']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[normalize-space()='Share post']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[normalize-space()='Suivant']")).click();
-        Thread.sleep(1000);
-        WebElement upload = driver.findElement(By.id("upload-photo"));
-        Thread.sleep(500);
+    public void successsharepost() {
+        // Naviguer vers la communauté
+        WebElement communityLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Community']")));
+        communityLink.click();
+
+        // Cliquer sur "Share post"
+        WebElement sharePostButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Share post']")));
+        sharePostButton.click();
+
+        // Suivant
+        WebElement suivantButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Suivant']")));
+        suivantButton.click();
+
+        // Upload photo
+        WebElement upload = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("upload-photo")));
         upload.sendKeys("/Users/takiacademy/Desktop/zlatan-ibrahimovic-zlatan.gif");
-        Thread.sleep(500);
-        driver.findElement(By.xpath("//button[normalize-space()='Next']")).click();
-        Thread.sleep(2000);
+
+        // Suivant après l'upload
+        WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Next']")));
+        nextButton.click();
+
         checkSuccessMessage();
     }
-    public void failedsharepost() throws InterruptedException {
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//a[normalize-space()='Community']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[normalize-space()='Share post']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[normalize-space()='Suivant']")).click();
-        Thread.sleep(1000);
-        WebElement upload = driver.findElement(By.id("upload-photo"));
-        Thread.sleep(500);
-        driver.findElement(By.xpath("//button[normalize-space()='Next']")).click();
-        Thread.sleep(1000);
+
+    public void failedsharepost() {
+        WebElement communityLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Community']")));
+        communityLink.click();
+
+        WebElement sharePostButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Share post']")));
+        sharePostButton.click();
+
+        WebElement suivantButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Suivant']")));
+        suivantButton.click();
+
+        WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Next']")));
+        nextButton.click();
+
         checkSuccessMessage();
     }
 
@@ -85,25 +85,32 @@ public class sharepost {
         try {
             WebElement success = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[normalize-space()='Post has been created successfully']")));
             if (success.isDisplayed()) {
-                System.out.println("post shared successfully");
+                System.out.println("Post shared successfully");
             } else {
                 System.out.println("Failed");
             }
         } catch (Exception e) {
-            System.out.println("Failed"); // Message when the element is not found
+            System.out.println("Failed");
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
+    public static void main(String[] args) {
         sharepost sharepost = new sharepost();
 
         sharepost.setUp();
         sharepost.login();
         sharepost.successsharepost();
+        sharepost.tearDown(); // Ferme le navigateur après successsharepost
 
         sharepost.setUp();
         sharepost.login();
         sharepost.failedsharepost();
-
+        sharepost.tearDown(); // Ferme le navigateur après successsharepost
     }
 }

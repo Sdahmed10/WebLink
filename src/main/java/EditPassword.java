@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ public class EditPassword {
     private WebDriverWait wait;
 
 
+    @BeforeClass
     public void setUp() {
         //Create a map to store  preferences
         Map<String, Object> prefs = new HashMap<String, Object>();
@@ -34,25 +37,20 @@ public class EditPassword {
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
     }
 
-    public void tearDown() {
-        // Close the browser
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
+    @Test(priority = 1)
     public void login() throws InterruptedException {
         Thread.sleep(3000);
         WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
         email.sendKeys("taxip60889@rowplant.com");
         email.click();
         WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
-        password.sendKeys("123456Aa@");
+        password.sendKeys("12345Aa@");
         password.click();
         WebElement login = driver.findElement(By.xpath("//*[@id=\"light\"]/div/div/form/button"));
         login.click();
     }
-
+    @Test(priority = 2)
     public void failedchangepassword() throws InterruptedException {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//span[normalize-space()='Password']")).click();
@@ -78,7 +76,7 @@ public class EditPassword {
             e.printStackTrace();
         }
     }
-
+    @Test(priority = 3)
     public void failedchangepassword1() throws InterruptedException {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//span[normalize-space()='Password']")).click();
@@ -106,7 +104,7 @@ public class EditPassword {
             e.printStackTrace();
         }
     }
-
+    @Test(priority = 4)
     public void failedchangepassword2() throws InterruptedException {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//span[normalize-space()='Password']")).click();
@@ -134,7 +132,7 @@ public class EditPassword {
             e.printStackTrace();
         }
     }
-
+    @Test(priority = 5)
     public void failedchangepassword3() throws InterruptedException {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//span[normalize-space()='Password']")).click();
@@ -162,7 +160,7 @@ public class EditPassword {
             e.printStackTrace();
         }
     }
-
+    @Test(priority = 6)
     public void Sucesschangepassword() throws InterruptedException {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//span[normalize-space()='Password']")).click();
@@ -200,6 +198,12 @@ public class EditPassword {
         }
     }
 
+    public void tearDown() {
+        // Close the browser
+        if (driver != null) {
+            driver.quit();
+        }
+    }
     public static void main(String[] args) throws InterruptedException {
         EditPassword EditPassword = new EditPassword();
 
