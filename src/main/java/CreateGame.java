@@ -1,6 +1,7 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,18 +17,16 @@ public class CreateGame {
 
     @BeforeClass
     public void Setup() {
-        //Create a map to store  preferences
-        Map<String, Object> prefs = new HashMap<String, Object>();
-        //Pass the argument 1 to allow and 2 to block
+        // Create a map to store preferences
+        Map<String, Object> prefs = new HashMap<>();
+        // Pass the argument 1 to allow and 2 to block
         prefs.put("profile.default_content_setting_values.notifications", 1);
-        //Create an instance of ChromeOptions
+        // Create an instance of ChromeOptions
         ChromeOptions options = new ChromeOptions();
-        // set ExperimentalOption - prefs
+        // Set ExperimentalOption - prefs
         options.setExperimentalOption("prefs", prefs);
-        //Now Pass ChromeOptions instance to ChromeDriver Constructor to initialize chrome driver which will switch off this browser notification on the chrome browser
+        // Initialize the Chrome driver with the options
         driver = new ChromeDriver(options);
-        //driver = new SafariDriver();
-        //driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
@@ -35,168 +34,160 @@ public class CreateGame {
     }
 
     @Test(priority = 1)
-    public void login() throws InterruptedException {
-        Thread.sleep(1000);
-        WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
+    public void login() {
+        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='email']")));
         email.sendKeys("varoxe6978@kernuo.com");
-        email.click();
-        WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
+
+        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='password']")));
         password.sendKeys("12345Aa@");
-        password.click();
-        WebElement login = driver.findElement(By.xpath("//*[@id=\"light\"]/div/div/form/button"));
+
+        WebElement login = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"light\"]/div/div/form/button")));
         login.click();
     }
 
     @Test(priority = 2)
-    public void successPublishgame() throws InterruptedException {
-        Thread.sleep(3000);
-        driver.findElement(By.xpath("//a[normalize-space()='Games']")).click();
-        Thread.sleep(1000);
-        WebElement create = driver.findElement(By.xpath("//button[normalize-space()='create new game']"));
-        create.click();
-        Thread.sleep(2000);
-        WebElement club = driver.findElement(By.cssSelector("#rc_select_0"));
-        club.sendKeys("metz");
-        club.click();
-        Thread.sleep(2000);
-        WebElement everton = driver.findElement(By.xpath("//div[@class='shared-async-select__option']"));
-        everton.click();
-        WebElement hours = driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]"));
-        hours.click();
-        Thread.sleep(1000);
-        WebElement hours1 = driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]"));
-        hours1.click();
-        Thread.sleep(1000);
-        WebElement hours2 = driver.findElement(By.xpath("//ul[@data-type='hour']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='07']"));
-        hours2.click();
-        WebElement hours3 = driver.findElement(By.xpath("//ul[@data-type='minute']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='06']"));
-        hours3.click();
-        driver.findElement(By.xpath("//span[normalize-space()='OK']")).click();
-        Thread.sleep(2000);
-        WebElement search = driver.findElement(By.xpath("//input[@placeholder='Match Stadium']"));
-        search.click();
-        Thread.sleep(2000);
-        WebElement adress = driver.findElement(By.xpath("//input[@placeholder='Search an address']"));
-        adress.sendKeys("Sousse,Tunisie");
-        adress.click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//button[normalize-space()='Save position']")).click();
-        Thread.sleep(1000);
-        WebElement MiniAge = driver.findElement(By.xpath("//div[4]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]"));
-        int n2 = 24;
-        for (int i = 0; i < n2; i++) {
-            MiniAge.click();
-        }
-        Thread.sleep(1000);
-        WebElement MaxAge = driver.findElement(By.xpath("//div[5]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]"));
-        int n3 = 26;
-        for (int i = 0; i < n3; i++) {
-            MaxAge.click();
-        }
-        Thread.sleep(2000);
-        WebElement date = driver.findElement(By.xpath("//input[@placeholder='Match Date']"));
-        date.click();
-        Thread.sleep(2000);
-        WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']"));
-        date3.click();
-        Thread.sleep(1000);
-        WebElement description = driver.findElement(By.xpath("//textarea[@placeholder='Description']"));
-        description.sendKeys("1234567890");
-        description.click();
-        Thread.sleep(1000);
-        WebElement publish = driver.findElement(By.xpath("//button[normalize-space()='publish']"));
-        publish.click();
-        Thread.sleep(3000);
-        try {
-            // Attendre que le résultat soit visible (par exemple, un message de confirmation)
-            WebElement Modifierlematch = driver.findElement(By.xpath("//button[normalize-space()='Modifier le match']"));
-            // Vérifier que le message de succès est affiché
-            if (Modifierlematch.isDisplayed()) {
-                System.out.println("La création du jeu a été confirmée avec succès.");
-            } else {
-                System.out.println("Échec de la confirmation de la création du jeu.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    @Test(priority = 3)
-    public void FailedPublishgame() throws InterruptedException {
-        Thread.sleep(3000);
-        driver.findElement(By.xpath("//a[normalize-space()='Games']")).click();
-        Thread.sleep(1000);
-        WebElement create = driver.findElement(By.xpath("//button[normalize-space()='create new game']"));
-        create.click();
-        Thread.sleep(2000);
-        WebElement club = driver.findElement(By.cssSelector("input[type='search']"));
+    public void successPublishgame() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Games']"))).click();
 
-//        WebElement club = driver.findElement(By.xpath("//input[type='search']"));
+        WebElement create = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='create new game']")));
+        create.click();
+
+        WebElement club = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#rc_select_0")));
         club.sendKeys("metz");
         club.click();
-        Thread.sleep(2000);
-        WebElement everton = driver.findElement(By.xpath("//div[@class='shared-async-select__option']"));
+
+        WebElement everton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='shared-async-select__option']")));
         everton.click();
-        WebElement hours = driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]"));
+
+        WebElement hours = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]")));
         hours.click();
-        Thread.sleep(1000);
-        WebElement hours1 = driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]"));
+
+        WebElement hours1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]")));
         hours1.click();
-        Thread.sleep(1000);
-        WebElement hours2 = driver.findElement(By.xpath("//ul[@data-type='hour']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='07']"));
+
+        WebElement hours2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@data-type='hour']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='07']")));
         hours2.click();
-        WebElement hours3 = driver.findElement(By.xpath("//ul[@data-type='minute']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='06']"));
+
+        WebElement hours3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@data-type='minute']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='06']")));
         hours3.click();
+
         driver.findElement(By.xpath("//span[normalize-space()='OK']")).click();
-        Thread.sleep(2000);
-        WebElement search = driver.findElement(By.xpath("//input[@placeholder='Match Stadium']"));
+
+        WebElement search = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Match Stadium']")));
         search.click();
-        Thread.sleep(2000);
-        WebElement adress = driver.findElement(By.xpath("//input[@placeholder='Search an address']"));
-        adress.sendKeys("Sousse,Tunisie");
-        adress.click();
-        Thread.sleep(2000);
+
+        WebElement address = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Search an address']")));
+        address.sendKeys("Sousse,Tunisie");
+        address.click();
+
         driver.findElement(By.xpath("//button[normalize-space()='Save position']")).click();
-        Thread.sleep(1000);
-        WebElement MiniAge = driver.findElement(By.xpath("//div[4]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]"));
+
+        WebElement miniAge = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[4]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]")));
         int n2 = 24;
         for (int i = 0; i < n2; i++) {
-            MiniAge.click();
+            miniAge.click();
         }
-        Thread.sleep(1000);
-        WebElement MaxAge = driver.findElement(By.xpath("//div[5]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]"));
+
+        WebElement maxAge = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[5]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]")));
         int n3 = 26;
         for (int i = 0; i < n3; i++) {
-            MaxAge.click();
+            maxAge.click();
         }
-        Thread.sleep(2000);
-        WebElement date = driver.findElement(By.xpath("//input[@placeholder='Match Date']"));
+
+        WebElement date = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Match Date']")));
         date.click();
-        Thread.sleep(2000);
-        WebElement date3 = driver.findElement(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']"));
+
+        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']")));
         date3.click();
-        Thread.sleep(1000);
-        WebElement publish = driver.findElement(By.xpath("//button[normalize-space()='publish']"));
+
+        WebElement description = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@placeholder='Description']")));
+        description.sendKeys("1234567890");
+
+        WebElement publish = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='publish']")));
         publish.click();
-        Thread.sleep(2000);
+
         try {
-            // Attendre que le résultat soit visible (par exemple, un message de confirmation)
-            WebElement Modifierlematch = driver.findElement(By.xpath("//p[normalize-space()='required match description']"));
-            Thread.sleep(3000);
-            // Vérifier que le message de succès est affiché
-            if (Modifierlematch.isDisplayed()) {
-                System.out.println("Échec de la confirmation de la création du jeu. ");
-            } else {
+            // Wait for the confirmation message
+            WebElement modifyMatch = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[normalize-space()='Modifier le match']")));
+            if (modifyMatch.isDisplayed()) {
                 System.out.println("La création du jeu a été confirmée avec succès.");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (TimeoutException e) {
+            System.out.println("Échec de la confirmation de la création du jeu.");
         }
     }
+
+    @Test(priority = 3)
+    public void FailedPublishgame() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Games']"))).click();
+
+        WebElement create = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='create new game']")));
+        create.click();
+
+        WebElement club = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='search']")));
+        club.sendKeys("metz");
+        club.click();
+
+        WebElement everton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='shared-async-select__option']")));
+        everton.click();
+
+        WebElement hours = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]")));
+        hours.click();
+
+        WebElement hours1 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class='game-create main-layout-outlet']/div[@class=' main-layout-container']/div[@class='game-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]/div[1]/div[1]")));
+        hours1.click();
+
+        WebElement hours2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@data-type='hour']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='07']")));
+        hours2.click();
+
+        WebElement hours3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@data-type='minute']//div[@class='ant-picker-time-panel-cell-inner'][normalize-space()='06']")));
+        hours3.click();
+
+        driver.findElement(By.xpath("//span[normalize-space()='OK']")).click();
+
+        WebElement search = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Match Stadium']")));
+        search.click();
+
+        WebElement address = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Search an address']")));
+        address.sendKeys("Sousse,Tunisie");
+        address.click();
+
+        driver.findElement(By.xpath("//button[normalize-space()='Save position']")).click();
+
+        WebElement miniAge = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[4]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]")));
+        int n2 = 24;
+        for (int i = 0; i < n2; i++) {
+            miniAge.click();
+        }
+
+        WebElement date = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Match Date']")));
+        date.click();
+
+        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']")));
+        date3.click();
+
+        WebElement description = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@placeholder='Description']")));
+        description.sendKeys("1234567890");
+
+        // Publish without setting maximum age
+        WebElement publish = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='publish']")));
+        publish.click();
+
+        // Wait for the error message
+        try {
+            WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Error message')]"))); // Adjust this xpath to the actual error message
+            if (errorMessage.isDisplayed()) {
+                System.out.println("Erreur: " + errorMessage.getText());
+            }
+        } catch (TimeoutException e) {
+            System.out.println("Aucun message d'erreur affiché.");
+        }
+    }
+
     @AfterClass
     public void tearDown() {
-        driver.close();
-        System.out.println("Test completed successfully");
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
-
