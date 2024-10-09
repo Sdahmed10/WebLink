@@ -44,7 +44,7 @@ public class CreateTryout {
     public void login() throws InterruptedException {
         Thread.sleep(1000);
         WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
-        email.sendKeys("varoxe6978@kernuo.com");
+        email.sendKeys("neyad39254@paxnw.com");
         email.click();
         WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
         password.sendKeys("12345Aa@");
@@ -57,8 +57,8 @@ public class CreateTryout {
     public void successPublishtryout() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(By.xpath("//div[@class='user-info']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout my-profile-wrapper']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='my-profile-container']/div[@class='my-profile-section my-profile-section__user-events']/div[@class='club-event-container']/p[2]/span[1]")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[@class='my-profile-section my-profile-section__user-events']//p[2]")).click();
         Thread.sleep(2000);
         WebElement title = driver.findElement(By.xpath("//textarea[@placeholder='Tryout Title']"));
         title.sendKeys("Tryout test");
@@ -132,8 +132,8 @@ public class CreateTryout {
     public void sharepostfailed() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(By.xpath("//div[@class='user-info']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout my-profile-wrapper']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='my-profile-container']/div[@class='my-profile-section my-profile-section__user-events']/div[@class='club-event-container']/p[2]/span[1]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[@class='my-profile-section my-profile-section__user-events']//p[2]")).click();
         Thread.sleep(1000);
 //        WebElement title = driver.findElement(By.xpath("//textarea[@placeholder='Title']"));
 //        title.sendKeys("Tryout test");

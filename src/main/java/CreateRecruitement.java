@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -49,8 +50,9 @@ public class CreateRecruitement {
     }
     @Test(priority = 2)
     public void successPublishRecruitement() throws InterruptedException {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='user-info']"))).click();
         Thread.sleep(2000);
-        WebElement Recruitement = driver.findElement(By.xpath("//a[normalize-space()='Recruitment']"));
+        WebElement Recruitement = driver.findElement(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout my-profile-wrapper']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='my-profile-container']/div[@class='my-profile-section my-profile-section__user-events']/div[@class='club-event-container']/p[3]"));
         Recruitement.click();
         Thread.sleep(1000);
         driver.findElement(By.xpath("//button[normalize-space()='create new recruitment']")).click();

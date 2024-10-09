@@ -3,10 +3,9 @@
 <suite name="All Test Suite">
 <test verbose="2" preserve-order="true" name="/Users/takiacademy/IdeaProjects/WebLinkeFoot">
     <classes>
-        <class name="Login1"/>
-        <class name="CreateTryout"/>
-        <class name="CreateGame"/>
-        <class name="CreateRecruitement"/>
+        <class name = "CreateGame"/>
+        <class name = "CreateRecruitement"/>
+        <class name = "CreateTryout"/>
     </classes>
 </test>
 </suite>
