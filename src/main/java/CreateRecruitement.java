@@ -303,6 +303,35 @@ public class CreateRecruitement {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) throws InterruptedException {
+        CreateRecruitement createRecruitement = new CreateRecruitement();
+
+        createRecruitement.setUp();
+        createRecruitement.login();
+        createRecruitement.successPublishRecruitement();
+        createRecruitement.tearDown(); // Ferme le navigateur après successsharepost
+
+        createRecruitement.setUp();
+        createRecruitement.login();
+        createRecruitement.failedPublishRecruitement();
+        createRecruitement.tearDown(); // Ferme le navigateur après successsharepost
+
+        createRecruitement.setUp();
+        createRecruitement.login();
+        createRecruitement.failedPublishRecruitement1();
+        createRecruitement.tearDown(); // Ferme le navigateur après successsharepost
+
+        createRecruitement.setUp();
+        createRecruitement.login();
+        createRecruitement.failedPublishRecruitement2();
+        createRecruitement.tearDown(); // Ferme le navigateur après successsharepost
+
+        createRecruitement.setUp();
+        createRecruitement.login();
+        createRecruitement.failedPublishRecruitement3();
+        createRecruitement.tearDown(); // Ferme le navigateur après successsharepost
+    }
         @AfterClass
         public void tearDown() {
             driver.close();

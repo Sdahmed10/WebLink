@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateTryout {
+public class Tryout {
     private WebDriver driver;
     private WebDriverWait wait;
 
