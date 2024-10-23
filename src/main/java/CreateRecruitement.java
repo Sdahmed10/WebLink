@@ -33,7 +33,7 @@ public class CreateRecruitement {
     @Test(priority = 1)
     public void login() {
         WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
-        email.sendKeys("varoxe6978@kernuo.com");
+        email.sendKeys("neyad39254@paxnw.com");
 
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password")));
         password.sendKeys("12345Aa@");
@@ -70,7 +70,7 @@ public class CreateRecruitement {
                 "Disponibilité pour l'entraînement régulier et pour voyager pour des matchs et des tournois professionnels");
 
 
-        WebElement playerposition = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='tryout-create__content']/form[@class='shared-form']/div[2]/div[1]/div[1]")));
+        WebElement playerposition = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout ']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='tryout-create__content']/form[@class='shared-form']/div[@class='shared-form']/div[2]/div[1]/div[1]")));
         playerposition.click();
 
         WebElement positionOption = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='GK']//div[@class='shared-async-select__option']")));
