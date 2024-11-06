@@ -24,7 +24,7 @@ public class CreateRecruitement {
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
@@ -33,7 +33,7 @@ public class CreateRecruitement {
     @Test(priority = 1)
     public void login() {
         WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
-        email.sendKeys("neyad39254@paxnw.com");
+        email.sendKeys("spontaneous.tuna.dpai@flashpost.net");
 
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password")));
         password.sendKeys("12345Aa@");

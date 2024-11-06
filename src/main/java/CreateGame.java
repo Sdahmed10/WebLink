@@ -36,7 +36,7 @@ public class CreateGame {
     @Test(priority = 1)
     public void login() {
         WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='email']")));
-        email.sendKeys("varoxe6978@kernuo.com");
+        email.sendKeys("spontaneous.tuna.dpai@flashpost.net");
 
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='password']")));
         password.sendKeys("12345Aa@");
@@ -94,7 +94,7 @@ public class CreateGame {
         WebElement date = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Match Date']")));
         date.click();
 
-        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']")));
+        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("td[title='2024-11-29'] div[class='ant-picker-cell-inner']")));
         date3.click();
 
         WebElement description = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@placeholder='Description']")));
@@ -164,7 +164,7 @@ public class CreateGame {
         WebElement date = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Match Date']")));
         date.click();
 
-        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("td[title='2024-10-29'] div[class='ant-picker-cell-inner']")));
+        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("td[title='2024-11-29'] div[class='ant-picker-cell-inner']")));
         date3.click();
 
 

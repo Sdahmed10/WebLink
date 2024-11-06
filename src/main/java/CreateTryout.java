@@ -20,7 +20,7 @@ public class CreateTryout {
     private WebDriverWait wait;
 
     @BeforeClass
-    public void Setup() {
+    public void SetUp() {
         // Create a map to store preferences
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("profile.default_content_setting_values.notifications", 1);
@@ -30,7 +30,7 @@ public class CreateTryout {
         options.setExperimentalOption("prefs", prefs);
 
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
@@ -39,7 +39,7 @@ public class CreateTryout {
     @Test(priority = 1)
     public void login() {
         WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='email']")));
-        email.sendKeys("neyad39254@paxnw.com");
+        email.sendKeys("spontaneous.tuna.dpai@flashpost.net");
 
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='password']")));
         password.sendKeys("12345Aa@");
@@ -90,7 +90,7 @@ public class CreateTryout {
         WebElement date = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='ant-picker-input']")));
         date.click();
 
-        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[normalize-space()='27']")));
+        WebElement date3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[normalize-space()='19']")));
         date3.click();
 
         WebElement MiniAge = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[7]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]")));
@@ -108,6 +108,10 @@ public class CreateTryout {
 
         WebElement publish = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='publish']")));
         publish.click();
+
+        //Verify success messages
+        WebElement titlesuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='tryouts-list__nav-bar__title']")));
+        Assert.assertTrue(titlesuccessMessage.isDisplayed(), "Essay success");
     }
 
     @Test(priority = 3)
@@ -141,7 +145,7 @@ public class CreateTryout {
         WebElement date = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='ant-picker-input']")));
         date.click();
 
-        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[normalize-space()='28']")));
+        WebElement date3 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[normalize-space()='14']")));
         date3.click();
 
         WebElement MiniAge = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[7]//div[1]//div[1]//div[1]//*[name()='svg']//*[name()='path' and contains(@d,'M15.3852 1')]")));
@@ -166,14 +170,14 @@ public class CreateTryout {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Tryout tryout = new Tryout();
+        CreateTryout tryout = new CreateTryout();
 
-        tryout.Setup();
+        tryout.SetUp();
         tryout.login();
         tryout.successPublishtryout();
         tryout.tearDown(); // Ferme le navigateur après successsharepost
 
-        tryout.Setup();
+        tryout.SetUp();
         tryout.login();
         tryout.sharepostfailed();
         tryout.tearDown(); // Ferme le navigateur après successsharepost

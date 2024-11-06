@@ -47,10 +47,10 @@ public class Login1 {
         WebElement emailField = driver.findElement(By.id("email"));
         WebElement passwordField = driver.findElement(By.id("password"));
         WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Login']"));
-        emailField.sendKeys("varoxe6978@kernuo.com");
+        emailField.sendKeys("spontaneous.tuna.dpai@flashpost.net");
         passwordField.sendKeys("12345Aa@");
         loginButton.click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         // Vérification si l'utilisateur est redirigé vers la page d'accueil ou un tableau de bord
         String expectedUrl = "https://devlinkfootweb.softylines.com/profile";
         String actualUrl = driver.getCurrentUrl();
@@ -133,6 +133,32 @@ public class Login1 {
         log.info("Empty password: error message displayed");
     }
 
+
+    public static void main(String[] args) throws InterruptedException {
+        Login1 login = new Login1();
+        login.setUp();
+        login.testValidLogin();
+        login.tearDown();
+
+        login.setUp();
+        login.testInvalidLogin();
+        login.tearDown();
+
+        login.setUp();
+        login.testEmptyEmailAndPassword();
+        login.tearDown();
+
+        login.setUp();
+        login.testEmptyEmail();
+        login.tearDown();
+
+        login.setUp();
+        login.testEmptyPassword();
+        login.tearDown();
+
+
+
+    }
     @AfterClass
     public void tearDown() {
         driver.close();

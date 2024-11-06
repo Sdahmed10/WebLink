@@ -52,6 +52,7 @@ public class Editpost {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='post-container']//*[name()='svg']"))).click();
     }
 
+
     public static void main(String[] args) throws InterruptedException {
         Editpost edit = new Editpost();
         edit.Setup();
