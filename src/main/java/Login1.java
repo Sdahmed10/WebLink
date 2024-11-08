@@ -11,7 +11,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +48,19 @@ public class Login1 {
         driver.manage().window().maximize();
     }
 
+    private void takeScreenshot(String stepName) {
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String filename = "Login1/" + stepName + "_" + timestamp + ".png";
+        try {
+            Files.createDirectories(Paths.get("Login1"));
+            Files.copy(screenshot.toPath(), Paths.get(filename));
+            System.out.println("Screenshot taken: " + filename);
+        } catch (IOException e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+        }
+    }
+
     @Test(priority = 1)
     public void testValidLogin() throws InterruptedException {
         WebElement emailField = driver.findElement(By.id("email"));
@@ -50,7 +69,8 @@ public class Login1 {
         emailField.sendKeys("spontaneous.tuna.dpai@flashpost.net");
         passwordField.sendKeys("12345Aa@");
         loginButton.click();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
+        takeScreenshot("testValidLogin");
         // Vérification si l'utilisateur est redirigé vers la page d'accueil ou un tableau de bord
         String expectedUrl = "https://devlinkfootweb.softylines.com/profile";
         String actualUrl = driver.getCurrentUrl();
@@ -58,6 +78,8 @@ public class Login1 {
         WebElement logout = driver.findElement(By.xpath("//button[normalize-space()='Logout']"));
         log.info("Login successful: redirected to dashboard");
         logout.click();
+        Thread.sleep(2000);
+        takeScreenshot("Logout success");
     }
 
     @Test(priority = 2)
@@ -74,6 +96,9 @@ public class Login1 {
         WebElement errorMessage = driver.findElement(By.xpath("//p[@class='login-error-message error-message']"));
         Assert.assertTrue(errorMessage.isDisplayed(), "User not registered or not verified");
         log.info("Invalid login attempt: error message displayed");
+
+        Thread.sleep(2000);
+        takeScreenshot("testInvalidLogin");
     }
 
     @Test(priority = 3)
@@ -97,6 +122,9 @@ public class Login1 {
         Assert.assertTrue(passwordError.isDisplayed(), "Password is required");
         log.info("Empty email and password: error messages displayed");
 
+        Thread.sleep(2000);
+        takeScreenshot("testEmptyEmailAndPassword");
+
     }
 
     @Test(priority = 4)
@@ -113,6 +141,9 @@ public class Login1 {
         WebElement emailError = driver.findElement(By.xpath("//p[normalize-space()='E-mail is required']"));
         Assert.assertTrue(emailError.isDisplayed(), "Email is required");
         log.info("Empty email: error message displayed");
+
+        Thread.sleep(2000);
+        takeScreenshot("testEmptyEmail");
     }
 
     @Test(priority = 5)
@@ -131,6 +162,9 @@ public class Login1 {
         WebElement passwordError = driver.findElement(By.xpath("//p[normalize-space()='Password is required']"));
         Assert.assertTrue(passwordError.isDisplayed(), "Password is required");
         log.info("Empty password: error message displayed");
+
+        Thread.sleep(2000);
+        takeScreenshot("testEmptyPassword");
     }
 
 

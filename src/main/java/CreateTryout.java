@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -11,7 +9,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,20 +40,38 @@ public class CreateTryout {
         driver.get("https://devlinkfootweb.softylines.com/auth/jwt/login");
     }
 
+    private void takeScreenshot(String stepName) {
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String filename = "screenshots/" + stepName + "_" + timestamp + ".png";
+        try {
+            Files.createDirectories(Paths.get("screenshots"));
+            Files.copy(screenshot.toPath(), Paths.get(filename));
+            System.out.println("Screenshot taken: " + filename);
+        } catch (IOException e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+        }
+    }
+
     @Test(priority = 1)
-    public void login() {
+    public void login() throws InterruptedException {
         WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='email']")));
         email.sendKeys("spontaneous.tuna.dpai@flashpost.net");
+
 
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='password']")));
         password.sendKeys("12345Aa@");
 
         WebElement login = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"light\"]/div/div/form/button")));
         login.click();
+
+        Thread.sleep(2000);
+
+        takeScreenshot("Login");
     }
 
     @Test(priority = 2)
-    public void successPublishtryout() {
+    public void successPublishtryout() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='user-info']"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout my-profile-wrapper']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='my-profile-container']/div[@class='my-profile-section my-profile-section__user-events']/div[@class='club-event-container']/p[2]"))).click();
 
@@ -112,10 +134,14 @@ public class CreateTryout {
         //Verify success messages
         WebElement titlesuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='tryouts-list__nav-bar__title']")));
         Assert.assertTrue(titlesuccessMessage.isDisplayed(), "Essay success");
+
+        Thread.sleep(2000);
+
+        takeScreenshot("Essay success");
     }
 
     @Test(priority = 3)
-    public void sharepostfailed() {
+    public void sharepostfailed() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='user-info']"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body/div[@id='root']/div[@id='light']/div[@class='main-layout my-profile-wrapper']/div[@class='main-layout-content ']/div[@class=' main-layout-outlet']/div[@class=' main-layout-container']/div[@class='my-profile-container']/div[@class='my-profile-section my-profile-section__user-events']/div[@class='club-event-container']/p[2]"))).click();
 
@@ -167,6 +193,10 @@ public class CreateTryout {
 
         WebElement participantsErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[normalize-space()='required tryout description']")));
         Assert.assertTrue(participantsErrorMessage.isDisplayed(), "Le message d'erreur pour le champ 'Max Participants' n'est pas affiché");
+
+        Thread.sleep(2000);
+
+        takeScreenshot("Essay failed");
     }
 
     public static void main(String[] args) throws InterruptedException {
